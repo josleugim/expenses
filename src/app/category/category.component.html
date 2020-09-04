@@ -1,0 +1,19 @@
+<p>category works!</p>
+<table>
+  <thead>
+  <tr>
+    <th>No.</th>
+    <th>uuid</th>
+    <th>Nombre</th>
+    <th>Última modificación</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let category of categories; let i = index">
+    <td>{{i}}</td>
+    <td>{{category.uuid}}</td>
+    <td>{{category.name}}</td>
+    <td>{{category.updatedAtFormat}}</td>
+  </tr>
+  </tbody>
+</table>

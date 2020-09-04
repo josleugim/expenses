@@ -1,0 +1,10 @@
+<div class="select">
+  <select
+    (change)="conceptOnChange($event.target.value)"
+  >
+    <option value="" [defaultSelected]="">-</option>
+    <option
+      *ngFor="let concept of concepts" value="{{concept.uuid}}"
+    >{{concept.name}}</option>
+  </select>
+</div>

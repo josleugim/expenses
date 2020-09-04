@@ -1,0 +1,38 @@
+<div class="columns">
+  <form class="column is-half is-offset-one-quarter" [formGroup]="expenseForm" (ngSubmit)="onSubmit(expenseForm.value)">
+    <div class="field">
+      <label class="label">Concepto</label>
+      <div class="control">
+        <app-concepts-dropdown (selectedConceptUuid)="conceptDropdownChanged($event)"></app-concepts-dropdown>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label" for="amount">Monto</label>
+      <div class="control">
+        <input
+          id="amount"
+          type="number"
+          name="amount"
+          formControlName="amount"
+          class="input"
+        />
+      </div>
+    </div>
+    <div class="field">
+      <label class="label" for="note">Nota</label>
+      <div class="control">
+      <textarea
+        id="note"
+        name="note"
+        formControlName="note"
+        class="textarea"
+      ></textarea>
+      </div>
+    </div>
+    <button
+      class="button"
+      type="submit"
+    >Guardar</button>
+  </form>
+
+</div>
