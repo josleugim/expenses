@@ -1,0 +1,28 @@
+<div class="section">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>uuid</th>
+      <th>Categoría</th>
+      <th>Nombre</th>
+      <th>Última modificación</th>
+      <th>Opciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let concept of concepts">
+      <td>{{concept.uuid}}</td>
+      <td>{{concept.categoryId ? concept.categoryId.name : ''}}</td>
+      <td>{{concept.name}}</td>
+      <td>{{concept.updatedAt}}</td>
+      <td>
+        <button
+          type="button"
+          class="button is-small"
+          (click)="deleteConcept(concept.uuid)"
+        >Borrar</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,22 @@
+<section>
+  <h3 class="title">Crear categoría</h3>
+  <form
+    [formGroup]="categoryForm"
+    (ngSubmit)="onSubmit(categoryForm.value)"
+  >
+    <div class="field">
+      <input
+        type="text"
+        name="name"
+        formControlName="name"
+        required
+      />
+    </div>
+    <button
+      class="button"
+      type="submit"
+    >
+      Guardar
+    </button>
+  </form>
+</section>

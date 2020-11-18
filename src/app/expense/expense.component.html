@@ -1,38 +1,70 @@
-<div class="columns">
-  <form class="column is-half is-offset-one-quarter" [formGroup]="expenseForm" (ngSubmit)="onSubmit(expenseForm.value)">
-    <div class="field">
-      <label class="label">Concepto</label>
-      <div class="control">
-        <app-concepts-dropdown (selectedConceptUuid)="conceptDropdownChanged($event)"></app-concepts-dropdown>
+<div>
+  <div class="columns">
+    <form
+      class="column is-half is-offset-one-quarter"
+      [formGroup]="expenseForm"
+      (ngSubmit)="onSubmit(expenseForm.value)"
+    >
+      <div class="field">
+        <label class="label">Concepto</label>
+        <div class="control">
+          <app-concepts-dropdown (selectedConceptUuid)="conceptDropdownChanged($event)"></app-concepts-dropdown>
+        </div>
       </div>
-    </div>
-    <div class="field">
-      <label class="label" for="amount">Monto</label>
-      <div class="control">
-        <input
-          id="amount"
-          type="number"
-          name="amount"
-          formControlName="amount"
-          class="input"
-        />
+      <div class="field">
+        <label class="label" for="amount">Monto</label>
+        <div class="control">
+          <input
+            id="amount"
+            type="number"
+            name="amount"
+            formControlName="amount"
+            class="input"
+          />
+        </div>
       </div>
-    </div>
-    <div class="field">
-      <label class="label" for="note">Nota</label>
-      <div class="control">
+      <div class="field">
+        <label class="label" for="note">Nota</label>
+        <div class="control">
       <textarea
         id="note"
         name="note"
         formControlName="note"
         class="textarea"
       ></textarea>
+        </div>
       </div>
-    </div>
-    <button
-      class="button"
-      type="submit"
-    >Guardar</button>
-  </form>
-
+      <button
+        class="button"
+        type="submit"
+      >Guardar</button>
+    </form>
+  </div>
+  <div class="columns">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Concepto</th>
+        <th>Monto</th>
+        <th>Opciones</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let expense of expenses">
+        <td>{{expense.conceptId ? expense.conceptId.name : '-'}}</td>
+        <td>{{expense.amount}}</td>
+        <td>
+          <button
+            (click)="deleteData(expense.uuid)"
+            class="button"
+          >Borrar</button>
+        </td>
+      </tr>
+      <tr>
+        <td>Total</td>
+        <td>{{totalExpensesAmount}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

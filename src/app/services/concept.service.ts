@@ -13,4 +13,8 @@ export class ConceptService {
   getConcepts(): Observable<any> {
     return this.http.get(`${Constants.API}/concept`);
   }
+
+  updateByUuid(body): Observable<any> {
+    return this.http.put(`${Constants.API}/concept`, body);
+  }
 }

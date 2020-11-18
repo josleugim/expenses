@@ -9,13 +9,18 @@ import {ConceptService} from './services/concept.service';
 import { ConceptsDropdownComponent } from './common/concepts-dropdown/concepts-dropdown.component';
 import { ExpenseComponent } from './expense/expense.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import {ExpenseService} from './services/expense.service';
+import { ConceptComponent } from './concept/concept.component';
+import { CategoryAddComponent } from './category/category-add.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CategoryComponent,
     ConceptsDropdownComponent,
-    ExpenseComponent
+    ExpenseComponent,
+    ConceptComponent,
+    CategoryAddComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +28,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [CategoryService, ConceptService],
+  providers: [CategoryService, ConceptService, ExpenseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

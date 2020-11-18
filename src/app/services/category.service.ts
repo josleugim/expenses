@@ -14,4 +14,8 @@ export class CategoryService {
   getCategories(): Observable<any> {
     return this.http.get(`${Constants.API}/category`);
   }
+
+  post(categoryData): Observable<any> {
+    return this.http.post(`${Constants.API}/category`, categoryData);
+  }
 }

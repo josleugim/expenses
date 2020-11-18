@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import { ExpenseService } from '../services/expense.service';
+import { IExpense } from '../interfaces/iexpense';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-expense',
@@ -7,25 +10,48 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./expense.component.sass']
 })
 export class ExpenseComponent implements OnInit {
-  public expenseForm;
+  public expenseForm: FormGroup;
   private selectedConceptUuid: string;
-  constructor(private formBuilder: FormBuilder) {
+  public expenses: Observable<IExpense[]>;
+  public totalExpensesAmount: number;
+
+  constructor(private formBuilder: FormBuilder, private expenseService: ExpenseService) {
     this.expenseForm = this.formBuilder.group({
-      conceptUuid: '',
+      conceptId: '',
       amount: 0,
       note: ''
     });
   }
 
   ngOnInit(): void {
+    this.findAll();
   }
 
   conceptDropdownChanged(conceptUuid: string): any {
     this.selectedConceptUuid = conceptUuid;
   }
 
-  onSubmit(expenseData) {
-    expenseData.conceptUuid = this.selectedConceptUuid;
-    console.log(expenseData);
+  onSubmit(expenseData): void {
+    expenseData.conceptId = this.selectedConceptUuid;
+    this.expenseService.post(expenseData)
+      .subscribe(
+        () => this.findAll(),
+        error => console.log(error)
+      );
+  }
+
+  findAll(): any {
+    this.expenseService.getExpenses().subscribe(response => {
+      this.expenses = response.data;
+      this.totalExpensesAmount = response.data.reduce((acc, expense) => acc + expense.amount, 0);
+    });
+  }
+
+  deleteData(id): void {
+    this.expenseService.deleteExpense(id)
+      .subscribe(
+        () => this.findAll(),
+        error => console.log(error)
+      );
   }
 }
